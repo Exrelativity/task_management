@@ -1,0 +1,73 @@
+<!-- header.html -->
+<div class="navbar sticky top-0 right-0 flex flex-row justify-between px-4 max-lg:px-2 w-full bg-white z-[999]">
+    <div class="flex flex-row items-center lg:w-6/12 max-lg:w-6/12">
+        <div class="flex flex-row justify-start items-center">
+            <div
+                class="h-11 w-11 max-lg:hidden  border-1 border-r-0 flex flex-row items-center justify-center rounded-l-md bg-[#e7e7e7]">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                    fill="#585858">
+                    <path
+                        d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z" />
+                </svg>
+            </div>
+            <div class="">
+                <input type="search" placeholder="Search tasks"
+                    class="flex pr-0 max-lg:rounded-l-md max-lg:pl-1 bg-[#e7e7e7] border-solid border-1 lg:flex-grow border-l-0 rounded-l-none w-96 max-lg:w-auto rounded-r-md h-11" />
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-row items-center">
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                <div class="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px"
+                        fill="#585858">
+                        <path
+                            d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z" />
+                    </svg>
+                    <span class="badge badge-sm bg-[#2f45ea] border-0 indicator-item">0</span>
+                </div>
+            </div>
+            <div tabindex="0" class="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
+                <div class="card-body">
+                    <!-- notifications -->
+                </div>
+            </div>
+        </div>
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                <div class="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px"
+                        fill="#585858">
+                        <path
+                            d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z" />
+                    </svg>
+                    <span class="badge badge-sm bg-[#2f45ea] border-0 indicator-item">0</span>
+                </div>
+            </div>
+            <div tabindex="0" class="card card-compact dropdown-content bg-base-100 z-[1] mt-3 w-52 shadow">
+                <div class="card-body">
+                    <!-- notifications -->
+                </div>
+            </div>
+        </div>
+        <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 h-10 rounded-full">
+                    <img alt="Tailwind CSS Navbar component"
+                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                </div>
+            </div>
+            <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                <li>
+                    <a class="justify-between">
+                        Profile
+                        <span class="badge">New</span>
+                    </a>
+                </li>
+                <li><a>Settings</a></li>
+                <li><a>Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block title %} Task Management Dashboard {% endblock %}
+
+{% block extra_head %}
+<style>
+    .dragging {
+        opacity: 0.5;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% include 'components/topbar.html' %}
+<div
+    class="flex p-4 space-x-4 justify-around items-center flex-row max-lg:flex-col w-full max-lg:justify-center max-lg:items-center  max-lg:px-2">
+    <div class="w-1/3 max-lg:w-full">
+        <div
+            class="flex border-2 border-solid rounded-md px-4 h-11 border-[#2d43e2] flex-row justify-between items-center">
+            <div>
+                <h2 class="text-lg font-bold text-black">In Progress (<span class="text-[#929292]"
+                        id="in-progress-count">0</span>)</h2>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                    fill="#000000">
+                    <path
+                        d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z" />
+                </svg>
+            </div>
+        </div>
+        <div id="in-progress" class="bg-white h-[83vh] overflow-y-auto">
+            <!-- Task cards -->
+        </div>
+    </div>
+    <div class="w-1/3 max-lg:w-full">
+        <div
+            class="flex border-2 border-solid rounded-md px-4 h-11 border-[#2d43e2] flex-row justify-between items-center">
+            <div>
+                <h2 class="text-lg font-bold text-black">Completed Tasks (<span class="text-[#929292]"
+                        id="completed-count">0</span>)</h2>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                    fill="#000000">
+                    <path
+                        d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z" />
+                </svg>
+            </div>
+        </div>
+        <div id="completed" class="bg-white h-[83vh] overflow-y-auto">
+            <!-- Task cards -->
+        </div>
+    </div>
+    <div class="w-1/3 max-lg:w-full">
+        <div
+            class="flex border-2 border-solid rounded-md px-4 h-11 border-[#2d43e2] flex-row justify-between items-center">
+            <div>
+                <h2 class="text-lg font-bold text-black">Overdue (<span class="text-[#929292]"
+                        id="overdue-count">0</span>)</h2>
+            </div>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                    fill="#000000">
+                    <path
+                        d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z" />
+                </svg>
+            </div>
+        </div>
+        <div id="overdue" class="bg-white h-[83vh] overflow-y-auto">
+            <!-- Task cards -->
+        </div>
+    </div>
+</div>
+{% include 'components/task-modal.html' %}
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}

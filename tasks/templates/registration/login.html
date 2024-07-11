@@ -1,0 +1,33 @@
+{% load tailwind_filters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Login{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    {% block extra_head %}{% endblock %}
+
+</head>
+
+<body class="bg-white">
+    <div class="flex flex-row justify-center items-center w-full h-screen">
+        <div class="bg-white p-4 rounded-md w-96 flex flex-col items-center justify-start gap-4">
+            <h2>Login Page</h2>
+            <form method="post" class="w-full flex flex-col gap-4">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="bg-blue-500 w-full text-white px-4 py-2 rounded">Login</button>
+            </form>
+        </div>
+
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+
+</html>

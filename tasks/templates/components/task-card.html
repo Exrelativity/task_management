@@ -1,0 +1,105 @@
+<!-- task-card.html -->
+<div class="task-card p-4 mb-2 border rounded-md flex flex-col" data-id="" draggable="true" data-priority="{{priority}}"
+    data-due_date="{{due_date}}" data-category="{{category}}" data-assigned_to="{{assigned_to}}">
+    <div class="w-full flex flex-row justify-around items-center">
+        <div
+            class="bg-inherit border-solid rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-2 rounded-md">
+            <span>{{priority}}</span>
+        </div>
+        <div
+            class="bg-inherit border-solid rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-2 rounded-md">
+            <span>{{due_date}}</span>
+        </div>
+        <div
+            class="bg-inherit border-solid rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-2 rounded-md">
+            <span>{{category}}</span>
+        </div>
+    </div>
+    <div class="w-full flex flex-col justify-start">
+        <div class="flex flex-row justify-between items-center">
+            <div class="flex flex-row justify-start items-center">
+                <h2 class="font-bold w-full truncate">{{title}}</h2>
+            </div>
+            <div class="flex flex-row justify-end items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                    fill="#000000">
+                    <path
+                        d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z" />
+                </svg>
+            </div>
+        </div>
+        <div class="w-full flex flex-row justify-center items-center">
+            <p class="h-50 truncate w-full">{{description}}</p>
+        </div>
+        <div class="flex w-full flex-row justify-start items-center">
+            <button id="unkown-btn"
+                class="bg-inherit border-solid rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-2 rounded-md"><span>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#2d43e2">
+                        <path
+                            d="M360-200v-80h480v80H360Zm0-240v-80h480v80H360Zm0-240v-80h480v80H360ZM200-160q-33 0-56.5-23.5T120-240q0-33 23.5-56.5T200-320q33 0 56.5 23.5T280-240q0 33-23.5 56.5T200-160Zm0-240q-33 0-56.5-23.5T120-480q0-33 23.5-56.5T200-560q33 0 56.5 23.5T280-480q0 33-23.5 56.5T200-400Zm0-240q-33 0-56.5-23.5T120-720q0-33 23.5-56.5T200-800q33 0 56.5 23.5T280-720q0 33-23.5 56.5T200-640Z" />
+                    </svg>
+                </span>
+                <span>
+                    0/3
+                </span>
+            </button>
+        </div>
+        <div class="flex flex-row justify-between items-center w-full">
+
+            <div class="flex flex-row justify-center items-center">
+                <!-- User images -->
+                <div class="avatar-group -space-x-2 rtl:space-x-reverse">
+                    <div class="avatar border border-solid border-white">
+                        <div class="w-8">
+                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </div>
+                    <div class="avatar border border-solid border-white">
+                        <div class="w-8">
+                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </div>
+                    <div class="avatar border border-solid border-white">
+                        <div class="w-8">
+                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </div>
+                    <div class="avatar border border-solid border-white">
+                        <div class="w-8">
+                            <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                    </div>
+                    <div class="avatar border border-solid border-white placeholder">
+                        <div class="bg-[#3944e5] text-neutral-content w-8">
+                            <span>+2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-row justify-center items-center gap-2">
+                <a class="view-btn" href="#" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#2d43e2">
+                        <path
+                            d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
+                    </svg>
+                </a>
+                <a class="delete-btn" href="#" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#2d43e2">
+                        <path
+                            d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                    </svg></a>
+                <a class="edit-btn" href="#" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        fill="#2d43e2">
+                        <path
+                            d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

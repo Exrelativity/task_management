@@ -1,0 +1,21 @@
+{% extends "components/base.html" %}
+{% block title %}Task List{% endblock %}
+{% block content %}
+<a href="{% url 'task_create' %}" class="bg-blue-500 text-white px-4 py-2 rounded">Add Task</a>
+<div class="bg-white p-4 rounded shadow mt-4">
+    <ul>
+        {% for task in object_list %}
+        <li class="mb-2 p-2 border-b">
+            <h2 class="font-bold">{{ task.title }}</h2>
+            <p>{{ task.description }}</p>
+            <p>Status: {{ task.status }}</p>
+            <p>Priority: {{ task.priority }}</p>
+            <p>Due: {{ task.due_date }}</p>
+            <p>Category: {{ task.category }}</p>
+            <a href="{% url 'task_update' task.id %}" class="bg-green-500 text-white px-2 py-1 rounded">Edit</a>
+            <a href="{% url 'task_delete' task.id %}" class="bg-red-500 text-white px-2 py-1 rounded">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
