@@ -52,7 +52,7 @@ $(document).ready(function () {
                     taskCard = taskCard.replace(/{status}/gm, task.status);
                     taskCard = taskCard.replace(/{priority}/gm, task.priority);
                     taskCard = taskCard.replace(/{due_date}/gm, formatDueDate(task.due_date));
-                    taskCard = taskCard.replace(/{category}/gm, task.category);
+                    taskCard = taskCard.replace(/{category}/gm, task.category.slice(0, 12).concat(task.category.length > 12 ? '...' : ''));
                     taskCard = taskCard.replace(/{assigned_to}/gm, task.assigned_to);
                     taskCard = taskCard.replace('<span class="truncate text-sm">priority</span>', `<span class="truncate text-sm ${getPriorityTextColor(task.priority)}">${task.priority}</span>`);
 
@@ -253,26 +253,31 @@ $(document).ready(function () {
 
     // Drag-and-Drop functionality
     $(".task-card").draggable({
+        revert: "invalid",
+        stack: ".task-card",
         helper: "clone",
         start: function (event, ui) {
             $(this).addClass("dragging");
-            console.log("Drag start. ID:", $(this).data("id"));
         },
+
         stop: function (event, ui) {
             $(this).removeClass("dragging");
-            console.log("Drag stop. ID:", $(this).data("id"));
         }
     });
 
     $("#in-progress, #completed, #overdue").droppable({
         accept: ".task-card",
+        activate: function(event, ui) {
+            $(this).addClass("border-dashed border-2 border-blue-500");
+          },
+          deactivate: function(event, ui) {
+            $(this).removeClass("border-dashed border-2 border-blue-500");
+          },
         drop: function (event, ui) {
+            $(this).removeClass("border-dashed border-2 border-blue-500");
             let status = $(this).attr("id").replace("-", " ");
-            console.log("Dropping to:", status);
             let taskId = ui.draggable.data("id");
-            console.log("Task ID:", taskId);
 
-            // Simulate CSRF token retrieval (replace this with your actual method)
             let csrftoken = getCSRFToken();
 
             // Update task status via AJAX
@@ -287,8 +292,7 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     ui.draggable.appendTo(`#${status.toLowerCase().replace(' ', '-')}`).css({ top: 0, left: 0 });
-                    console.log("Task status updated to:", status);
-                    loadTasks(data.status); // Ensure loadTasks function is defined and works correctly
+                    loadTasks(data.status); 
                 }
             });
         }
