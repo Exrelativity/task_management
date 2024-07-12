@@ -242,7 +242,9 @@ $(document).ready(function () {
             },
             success: function (data) {
                 $('#task-modal').addClass('hidden');
-                loadTasks(data.status); // Reload tasks for the updated status
+                loadTasks('In Progress');
+                loadTasks('Completed');
+                loadTasks('Overdue');
             }
         });
     });
@@ -268,15 +270,26 @@ $(document).ready(function () {
     $("#in-progress, #completed, #overdue").droppable({
         accept: ".task-card",
         activate: function(event, ui) {
-            $(this).addClass("border-dashed border-2 border-blue-500");
-          },
-          deactivate: function(event, ui) {
-            $(this).removeClass("border-dashed border-2 border-blue-500");
-          },
+            $(this).addClass("border-dashed border-1 border-blue-500");
+        },
+
+        deactivate: function(event, ui) {
+            $(this).removeClass("border-dashed border-1 border-blue-500");
+        },
+
+        over: function(event, ui) {
+            $(this).addClass("border-dashed border-1 border-blue-500");
+        },
+
+        out: function(event, ui) {
+            $(this).removeClass("border-dashed border-1 border-blue-500");
+        },
+
         drop: function (event, ui) {
-            $(this).removeClass("border-dashed border-2 border-blue-500");
+            $(this).removeClass("border-dashed border-1 border-blue-500");
             let status = $(this).attr("id").replace("-", " ");
             let taskId = ui.draggable.data("id");
+            let prevStatus = ui.draggable.data("status").replace("-", " ");
 
             let csrftoken = getCSRFToken();
 
@@ -293,6 +306,7 @@ $(document).ready(function () {
                 success: function (data) {
                     ui.draggable.appendTo(`#${status.toLowerCase().replace(' ', '-')}`).css({ top: 0, left: 0 });
                     loadTasks(data.status); 
+                    loadTasks(prevStatus);
                 }
             });
         }
