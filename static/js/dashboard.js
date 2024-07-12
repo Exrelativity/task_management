@@ -256,17 +256,25 @@ $(document).ready(function () {
         helper: "clone",
         start: function (event, ui) {
             $(this).addClass("dragging");
+            console.log("Drag start. ID:", $(this).data("id"));
         },
         stop: function (event, ui) {
             $(this).removeClass("dragging");
+            console.log("Drag stop. ID:", $(this).data("id"));
         }
     });
 
     $("#in-progress, #completed, #overdue").droppable({
         accept: ".task-card",
         drop: function (event, ui) {
-            let status = $(this).attr("id").replace("-", " "); // Convert 'in-progress' to 'In Progress'
+            let status = $(this).attr("id").replace("-", " ");
+            console.log("Dropping to:", status);
             let taskId = ui.draggable.data("id");
+            console.log("Task ID:", taskId);
+
+            // Simulate CSRF token retrieval (replace this with your actual method)
+            let csrftoken = getCSRFToken();
+
             // Update task status via AJAX
             $.ajax({
                 url: `/api/tasks/${taskId}/`,
@@ -279,7 +287,8 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     ui.draggable.appendTo(`#${status.toLowerCase().replace(' ', '-')}`).css({ top: 0, left: 0 });
-                    loadTasks(data.status);
+                    console.log("Task status updated to:", status);
+                    loadTasks(data.status); // Ensure loadTasks function is defined and works correctly
                 }
             });
         }
