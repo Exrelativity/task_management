@@ -1,6 +1,5 @@
 // dashboard.js
 $(document).ready(function () {
-    // Load tasks dynamically
 
     function formatDueDate(dueDateStr) {
         const dueDate = new Date(dueDateStr);
@@ -67,7 +66,6 @@ $(document).ready(function () {
                 if (status === 'Overdue') {
                     populateCategoryFilter(allCategories);
                 }
-
             }
         });
 
@@ -128,26 +126,6 @@ $(document).ready(function () {
 
         $('#in-progress, #completed, #overdue').empty().append(sortedTasks);
     });
-
-
-    // $('#filter-btn').on('click', function () {
-    //     let priorityFilter = $('#priority-filter').val();
-    //     let categoryFilter = $('#category-filter').val();
-
-    //     $('.task-card').each(function () {
-    //         let taskPriority = $(this).data('priority');
-    //         let taskCategory = $(this).data('category');
-
-    //         let priorityMatch = priorityFilter === 'all' || taskPriority === priorityFilter;
-    //         let categoryMatch = categoryFilter === 'all' || taskCategory === categoryFilter;
-
-    //         if (priorityMatch && categoryMatch) {
-    //             $(this).show();
-    //         } else {
-    //             $(this).hide();
-    //         }
-    //     });
-    // });
 
     $('#priority-filter').on('change', function () {
         let priorityFilter = $(this).val();
@@ -222,17 +200,7 @@ $(document).ready(function () {
         let taskId = $('#task-id').val();
         let url = taskId ? `/api/tasks/${taskId}/` : '/api/tasks/';
         let method = taskId ? 'PUT' : 'POST';
-        // let formData = {
-        //     title: $('#id_title').val(),
-        //     description: $('#id_description').val(),
-        //     status: $('#id_status').val(),
-        //     priority: $('#id_priority').val(),
-        //     due_date: $('#id_due-date').val(),
-        //     category: $('#id_category').val(),
-        //     assigned_to: $('#id_assigned_to').val(),
-        // };
         let formData = $(this).serialize();
-        // console.log(formData);
         $.ajax({
             url: url,
             method: method,
@@ -258,6 +226,8 @@ $(document).ready(function () {
         revert: "invalid",
         stack: ".task-card",
         helper: "clone",
+        snap: true,
+        snapMode: "both",
         start: function (event, ui) {
             $(this).addClass("dragging");
         },
@@ -269,6 +239,8 @@ $(document).ready(function () {
 
     $("#in-progress, #completed, #overdue").droppable({
         accept: ".task-card",
+        greedy: true,
+        tolerance: "fit",
         activate: function(event, ui) {
             $(this).addClass("border-dashed border-1 border-blue-500");
         },
@@ -287,10 +259,12 @@ $(document).ready(function () {
 
         drop: function (event, ui) {
             $(this).removeClass("border-dashed border-1 border-blue-500");
-            let status = $(this).attr("id").replace("-", " ");
-            let taskId = ui.draggable.data("id");
+            const taskId = ui.draggable.data("id");
             let prevStatus = ui.draggable.data("status").replace("-", " ");
-
+            let status = $(this).attr("id").replace("-", " ");
+            ui.draggable.data("status", status.replace(" ", "-"));
+            ui.draggable.css({ position: "relative", top: "0", left: "0" }).appendTo($(this));
+           
             let csrftoken = getCSRFToken();
 
             // Update task status via AJAX
@@ -304,7 +278,6 @@ $(document).ready(function () {
                     xhr.setRequestHeader("X-CSRFToken", csrftoken);
                 },
                 success: function (data) {
-                    ui.draggable.appendTo(`#${status.toLowerCase().replace(' ', '-')}`).css({ top: 0, left: 0 });
                     loadTasks(data.status); 
                     loadTasks(prevStatus);
                 }
