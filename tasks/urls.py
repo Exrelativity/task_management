@@ -13,6 +13,6 @@ urlpatterns = [
     path('task/add/', TaskCreateView.as_view(), name='task_create'),
     path('task/<int:pk>/edit/', TaskUpdateView.as_view(), name='task_update'),
     path('task/<int:pk>/delete/', TaskDeleteView.as_view(), name='task_delete'),
-    path('api/tasks/', TaskListAPIView.as_view(), name='task_list_api'),
+    path('api/tasks-status/', TaskListAPIView.as_view(), name='task_list_api'),
     path('api/', include(router.urls)),
 ]

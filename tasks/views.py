@@ -5,7 +5,7 @@ from .forms import TaskForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 class DashboardView(
-    # LoginRequiredMixin,
+    LoginRequiredMixin,
     TemplateView
     ):
     template_name = 'dashboard.html'
@@ -20,7 +20,7 @@ class DashboardView(
 
 
 class TaskListView(
-    # LoginRequiredMixin, 
+    LoginRequiredMixin, 
     ListView):
     model = Task
     template_name = 'tasks/task_list.html'
@@ -29,7 +29,7 @@ class TaskListView(
 
 
 class TaskCreateView(
-    # LoginRequiredMixin, 
+    LoginRequiredMixin, 
     CreateView):
     model = Task
     form_class = TaskForm
@@ -40,7 +40,7 @@ class TaskCreateView(
 
 
 class TaskUpdateView(
-    # LoginRequiredMixin, 
+    LoginRequiredMixin, 
     UpdateView):
     model = Task
     form_class = TaskForm
@@ -50,7 +50,7 @@ class TaskUpdateView(
 
 
 class TaskDeleteView(
-    # LoginRequiredMixin, 
+    LoginRequiredMixin, 
     DeleteView):
     model = Task
     template_name = 'tasks/task_delete.html'

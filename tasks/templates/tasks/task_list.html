@@ -1,21 +1,127 @@
 {% extends "components/base.html" %}
 {% block title %}Task List{% endblock %}
 {% block content %}
-<a href="{% url 'task_create' %}" class="bg-blue-500 text-white px-4 py-2 rounded">Add Task</a>
-<div class="bg-white p-4 rounded shadow mt-4">
-    <ul>
+<div class="w-full flex flex-row justify-end items-center gap-4 mt-5">
+    <a href="{% url 'task_create' %}" id="add-task-btn"
+        class="bg-[#3944e5] flex border-solid w-30  border flex-row justify-center items-center text-white px-4 py-2 rounded-md">
+        <span><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#ffffff">
+                <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+            </svg>
+        </span>
+        <span class="max-lg:hidden">Add New Task</span>
+    </a>
+</div>
+<div class="bg-white p-4 mt-2">
+    <div class="flex flex-row flex-wrap justify-start items-center mb-4 gap-4">
         {% for task in object_list %}
-        <li class="mb-2 p-2 border-b">
-            <h2 class="font-bold">{{ task.title }}</h2>
-            <p>{{ task.description }}</p>
-            <p>Status: {{ task.status }}</p>
-            <p>Priority: {{ task.priority }}</p>
-            <p>Due: {{ task.due_date }}</p>
-            <p>Category: {{ task.category }}</p>
-            <a href="{% url 'task_update' task.id %}" class="bg-green-500 text-white px-2 py-1 rounded">Edit</a>
-            <a href="{% url 'task_delete' task.id %}" class="bg-red-500 text-white px-2 py-1 rounded">Delete</a>
-        </li>
+        <div class="flex mb-2 p-2 max-w-96">
+            <div class="task-card p-4 mb-2 rounded-md flex flex-col gap-2 flex-grow" data-id="{{task.id}}"
+                data-status="{{task.status}}" draggable="true" data-priority="{{task.priority}}"
+                data-due_date="{{task.due_date}}" data-category="{{task.category}}" data-assigned_to="{assigned_to}">
+                <div class="w-full flex flex-row justify-around items-center gap-2">
+                    <div
+                        class="bg-[#e8e8e8] border-solid shadow-sm  rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-1 rounded-md">
+                        <span class="truncate text-sm">{{task.priority}}</span>
+                    </div>
+                    <div
+                        class="bg-[#e8e8e8] border-solid  shadow-sm  rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-1 rounded-md">
+                        <span class="truncate text-sm text-[#2d43e2]">{{task.due_date}}</span>
+                    </div>
+                    <div
+                        class="bg-[#e8e8e8] border-solid shadow-sm  rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-1 rounded-md">
+                        <span class="truncate text-sm text-[#e861ce]">{{task.category}}</span>
+                    </div>
+                </div>
+                <div
+                    class="w-full border flex flex-col aspect-w-3 aspect-h-2 p-2 gap-2 rounded-md bg-[#e8e8e8] justify-start">
+                    <div class="flex flex-row justify-between items-center">
+                        <div class="flex flex-row justify-start items-center">
+                            <h2 class="font-bold w-full truncate text-[#222222] text-lg capitalize">{{task.title}}</h2>
+                        </div>
+                        <div class="flex flex-row justify-end items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                fill="#000000">
+                                <path
+                                    d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="w-full flex flex-row justify-center items-center">
+                        <p class="h-50 truncate w-full">{{task.description}}</p>
+                    </div>
+                    <div class="flex w-full flex-row justify-start items-center">
+                        <button id="unkown-btn"
+                            class="bg-inherit border-solid border-[#dbdbdb] rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-2 rounded-md"><span>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px" fill="#2d43e2">
+                                    <path
+                                        d="M360-200v-80h480v80H360Zm0-240v-80h480v80H360Zm0-240v-80h480v80H360ZM200-160q-33 0-56.5-23.5T120-240q0-33 23.5-56.5T200-320q33 0 56.5 23.5T280-240q0 33-23.5 56.5T200-160Zm0-240q-33 0-56.5-23.5T120-480q0-33 23.5-56.5T200-560q33 0 56.5 23.5T280-480q0 33-23.5 56.5T200-400Zm0-240q-33 0-56.5-23.5T120-720q0-33 23.5-56.5T200-800q33 0 56.5 23.5T280-720q0 33-23.5 56.5T200-640Z" />
+                                </svg>
+                            </span>
+                            <span>
+                                0/3
+                            </span>
+                        </button>
+                    </div>
+                    <div class="flex flex-row justify-between items-center w-full">
+
+                        <div class="flex flex-row justify-center items-center">
+                            <!-- User images -->
+                            <div class="avatar-group -space-x-2 rtl:space-x-reverse">
+                                <div class="avatar border border-solid border-white">
+                                    <div class="w-8">
+                                        <img
+                                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                                <div class="avatar border border-solid border-white">
+                                    <div class="w-8">
+                                        <img
+                                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                                <div class="avatar border border-solid border-white">
+                                    <div class="w-8">
+                                        <img
+                                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                                <div class="avatar border border-solid border-white">
+                                    <div class="w-8">
+                                        <img
+                                            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                    </div>
+                                </div>
+                                <div class="avatar border border-solid border-white placeholder">
+                                    <div class="bg-[#3944e5] text-neutral-content w-8">
+                                        <span>+2</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-row justify-center items-center gap-1">
+
+                            <a href="{% url 'task_delete' task.id %}" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px" fill="#2d43e2">
+                                    <path
+                                        d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+                                </svg></a>
+                            <a href="{% url 'task_update' task.id %}" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px" fill="#2d43e2">
+                                    <path
+                                        d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
 </div>
 {% endblock %}

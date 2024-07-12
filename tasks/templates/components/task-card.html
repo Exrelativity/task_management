@@ -1,24 +1,24 @@
 <!-- task-card.html -->
-<div class="task-card p-4 mb-2 border rounded-md flex flex-col" data-id="" draggable="true" data-priority="{{priority}}"
-    data-due_date="{{due_date}}" data-category="{{category}}" data-assigned_to="{{assigned_to}}">
-    <div class="w-full flex flex-row justify-around items-center">
+<div class="task-card p-4 mb-2 rounded-md flex flex-col gap-2" data-id="{id}" data-status="{status}" draggable="true"
+    data-priority="{priority}" data-due_date="{due_date}" data-category="{category}" data-assigned_to="{assigned_to}">
+    <div class="w-full flex flex-row justify-around items-center gap-2">
         <div
-            class="bg-inherit border-solid rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-2 rounded-md">
-            <span>{{priority}}</span>
+            class="bg-[#e8e8e8] border-solid shadow-sm  rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-1 rounded-md">
+            <span class="truncate text-sm">priority</span>
         </div>
         <div
-            class="bg-inherit border-solid rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-2 rounded-md">
-            <span>{{due_date}}</span>
+            class="bg-[#e8e8e8] border-solid  shadow-sm  rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-1 rounded-md">
+            <span class="truncate text-sm text-[#2d43e2]">{due_date}</span>
         </div>
         <div
-            class="bg-inherit border-solid rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-2 rounded-md">
-            <span>{{category}}</span>
+            class="bg-[#e8e8e8] border-solid shadow-sm  rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-1 rounded-md">
+            <span class="truncate text-sm text-[#e861ce]">{category}</span>
         </div>
     </div>
-    <div class="w-full flex flex-col justify-start">
+    <div class="w-full border flex flex-col aspect-w-3 aspect-h-2 p-2 gap-2 rounded-md bg-[#e8e8e8] justify-start">
         <div class="flex flex-row justify-between items-center">
             <div class="flex flex-row justify-start items-center">
-                <h2 class="font-bold w-full truncate">{{title}}</h2>
+                <h2 class="font-bold w-full truncate text-[#222222] text-lg capitalize">{title}</h2>
             </div>
             <div class="flex flex-row justify-end items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
@@ -29,11 +29,11 @@
             </div>
         </div>
         <div class="w-full flex flex-row justify-center items-center">
-            <p class="h-50 truncate w-full">{{description}}</p>
+            <p class="h-50 truncate w-full">{description}</p>
         </div>
         <div class="flex w-full flex-row justify-start items-center">
             <button id="unkown-btn"
-                class="bg-inherit border-solid rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-2 rounded-md"><span>
+                class="bg-inherit border-solid border-[#dbdbdb] rounded-md flex flex-row justify-center items-center gap-2 border border-[#e4e4e4] text-black px-4 py-2 rounded-md"><span>
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                         fill="#2d43e2">
                         <path
@@ -78,7 +78,7 @@
                 </div>
             </div>
 
-            <div class="flex flex-row justify-center items-center gap-2">
+            <div class="flex flex-row justify-center items-center gap-1">
                 <a class="view-btn" href="#" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
                         fill="#2d43e2">

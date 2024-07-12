@@ -23,7 +23,7 @@ This project is a Task Management Dashboard built with Django for the backend an
 
 Before you begin, ensure you have met the following requirements:
 
-- Python 3.x
+- Python 3.x installed in your Operating System(OS)
 - Django 3.x or higher
 
 ## Installation
