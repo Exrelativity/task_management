@@ -1,5 +1,68 @@
 // dashboard.js
 $(document).ready(function () {
+    let allCategories = new Set();
+    // Drag-and-Drop functionality
+    $(".task-card").draggable({
+        stack: ".task-card",
+        helper: "clone",
+        snap: true,
+        snapMode: "both",
+        start: function (event, ui) {
+            $(this).addClass("dragging");
+        },
+
+        stop: function (event, ui) {
+            $(this).removeClass("dragging");
+        }
+    });
+
+    $("#in-progress, #completed, #overdue").droppable({
+        accept: ".task-card",
+        greedy: true,
+        tolerance: "fit",
+        activate: function (event, ui) {
+            $(this).addClass("border-dashed border-1 border-blue-500");
+        },
+
+        deactivate: function (event, ui) {
+            $(this).removeClass("border-dashed border-1 border-blue-500");
+        },
+
+        over: function (event, ui) {
+            $(this).addClass("border-dashed border-1 border-blue-500");
+        },
+
+        out: function (event, ui) {
+            $(this).removeClass("border-dashed border-1 border-blue-500");
+        },
+
+        drop: function (event, ui) {
+            $(this).removeClass("border-dashed border-1 border-blue-500");
+            const taskId = ui.draggable.data("id");
+            let prevStatus = ui.draggable.data("status").replace("-", " ");
+            let status = $(this).attr("id").replace("-", " ");
+            ui.draggable.data("status", status.replace(" ", "-"));
+            ui.draggable.css({ position: "relative", top: "0", left: "0" }).appendTo($(this));
+
+            let csrftoken = getCSRFToken();
+
+            // Update task status via AJAX
+            $.ajax({
+                url: `/api/tasks/${taskId}/`,
+                method: 'PATCH',
+                data: {
+                    status: status
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                },
+                success: function (data) {
+                    loadTasks(data.status);
+                    loadTasks(prevStatus);
+                }
+            });
+        }
+    });
 
     function formatDueDate(dueDateStr) {
         const dueDate = new Date(dueDateStr);
@@ -34,8 +97,6 @@ $(document).ready(function () {
 
         return formattedDate;
     }
-
-    let allCategories = new Set();
 
     function loadTasks(status) {
         $.ajax({
@@ -221,67 +282,4 @@ $(document).ready(function () {
         $('#task-modal').addClass('hidden');
     });
 
-    // Drag-and-Drop functionality
-    $(".task-card").draggable({
-        revert: "invalid",
-        stack: ".task-card",
-        helper: "clone",
-        snap: true,
-        snapMode: "both",
-        start: function (event, ui) {
-            $(this).addClass("dragging");
-        },
-
-        stop: function (event, ui) {
-            $(this).removeClass("dragging");
-        }
-    });
-
-    $("#in-progress, #completed, #overdue").droppable({
-        accept: ".task-card",
-        greedy: true,
-        tolerance: "fit",
-        activate: function(event, ui) {
-            $(this).addClass("border-dashed border-1 border-blue-500");
-        },
-
-        deactivate: function(event, ui) {
-            $(this).removeClass("border-dashed border-1 border-blue-500");
-        },
-
-        over: function(event, ui) {
-            $(this).addClass("border-dashed border-1 border-blue-500");
-        },
-
-        out: function(event, ui) {
-            $(this).removeClass("border-dashed border-1 border-blue-500");
-        },
-
-        drop: function (event, ui) {
-            $(this).removeClass("border-dashed border-1 border-blue-500");
-            const taskId = ui.draggable.data("id");
-            let prevStatus = ui.draggable.data("status").replace("-", " ");
-            let status = $(this).attr("id").replace("-", " ");
-            ui.draggable.data("status", status.replace(" ", "-"));
-            ui.draggable.css({ position: "relative", top: "0", left: "0" }).appendTo($(this));
-           
-            let csrftoken = getCSRFToken();
-
-            // Update task status via AJAX
-            $.ajax({
-                url: `/api/tasks/${taskId}/`,
-                method: 'PATCH',
-                data: {
-                    status: status
-                },
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                },
-                success: function (data) {
-                    loadTasks(data.status); 
-                    loadTasks(prevStatus);
-                }
-            });
-        }
-    });
 });
