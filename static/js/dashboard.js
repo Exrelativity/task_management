@@ -27,10 +27,10 @@ $(document).ready(function () {
             formattedDate = `Yesterday`;
         } else if (differenceInDays < 7 && differenceInDays > 0) {
             // Due within a week
-            formattedDate = `${dueDate.toLocaleDateString('en-US', { weekday: 'long' })} at ${dueDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+            formattedDate = `${dueDate.toLocaleDateString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
         } else {
             // Distant date
-            formattedDate = `${dueDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} at ${dueDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
+            formattedDate = `${dueDate.toLocaleDateString('en-US', { hour: '2-digit', minute: '2-digit' })}`;
         }
 
         return formattedDate;
